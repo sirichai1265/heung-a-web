@@ -1,0 +1,97 @@
+<title>Vessel Ops Dashboards</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --ink: #1a1a1a;
+    --muted: #57606a;
+    --line: #d0d7de;
+    --card: #ffffff;
+    --card-hover: #f6f8fa;
+    --link: #0969da;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d1117;
+      --ink: #e6edf3;
+      --muted: #8b949e;
+      --line: #30363d;
+      --card: #161b22;
+      --card-hover: #1c2129;
+      --link: #4493f8;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0d1117;
+    --ink: #e6edf3;
+    --muted: #8b949e;
+    --line: #30363d;
+    --card: #161b22;
+    --card-hover: #1c2129;
+    --link: #4493f8;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans Thai", sans-serif;
+    max-width: 640px;
+    margin: 3rem auto;
+    padding: 0 1.5rem 4rem;
+    line-height: 1.6;
+    color: var(--ink);
+    background: var(--bg);
+  }
+  h1 {
+    font-size: 1.6rem;
+    margin: 0 0 .4rem;
+  }
+  .sub {
+    margin: 0 0 2rem;
+    color: var(--muted);
+  }
+  ul { list-style: none; padding: 0; margin: 0; }
+  li { margin: .75rem 0; }
+  a.card {
+    display: block;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--link);
+    font-weight: 600;
+    background: var(--card);
+  }
+  a.card:hover { background: var(--card-hover); }
+  a.card .desc {
+    display: block;
+    margin-top: .25rem;
+    font-weight: 400;
+    font-size: .9rem;
+    color: var(--muted);
+  }
+  footer {
+    margin-top: 2.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--line);
+    font-size: .85rem;
+    color: var(--muted);
+  }
+</style>
+
+<h1>Vessel Ops Dashboards</h1>
+<p class="sub">รวมลิงก์แดชบอร์ดปฏิบัติการท่าเรือ THBKK &amp; THLCH — สร้างด้วย AI</p>
+
+<ul>
+  <li>
+    <a class="card" href="https://sirichai1265.github.io/VESSEL-SKED/" target="_blank" rel="noopener">
+      Vessel Schedule
+      <span class="desc">ตารางหมุนเวียนเรือ — ETA/ETD, สถานะ Alongside / In-transit, เรือเข้าใน 48 ชม.</span>
+    </a>
+  </li>
+  <li>
+    <a class="card" href="https://sirichai1265.github.io/cut-off-open-gate-dashboard/" target="_blank" rel="noopener">
+      Cut off / Open Gate Dashboard
+      <span class="desc">Cut-off Dry (ETA−24h) / Reefer (ETA−1h) และ Open gate คืนตู้เปล่า (ETD−6d)</span>
+    </a>
+  </li>
+</ul>
+
+<footer>2 dashboards · POL THBKK / THLCH · updated 9 Sep 2026</footer>
