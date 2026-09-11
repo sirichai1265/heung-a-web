@@ -94,4 +94,10 @@
   </li>
 </ul>
 
-<footer>2 dashboards · POL THBKK / THLCH · updated 10 Sep 2026</footer>
+<footer>2 dashboards · POL THBKK / THLCH · updated <span id="updated">—</span></footer>
+
+<script>
+  document.getElementById("updated").textContent = new Intl.DateTimeFormat("en-GB", {
+    timeZone: "Asia/Bangkok", day: "2-digit", month: "short", year: "numeric"
+  }).format(new Date());
+</script>
