@@ -1,103 +1,305 @@
-<title>Vessel Ops Dashboards</title>
+<title>Terminal Ops Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Roboto+Mono:wght@400;500;600&display=swap">
 <style>
-  :root {
-    --bg: #ffffff;
-    --ink: #1a1a1a;
-    --muted: #57606a;
-    --line: #d0d7de;
-    --card: #ffffff;
-    --card-hover: #f6f8fa;
-    --link: #0969da;
+  :root{
+    --bg: #eef2f7;
+    --surface: #ffffff;
+    --surface-2: #e3eaf2;
+    --ink: #10233f;
+    --ink-dim: #5b6a80;
+    --line: #d5dee9;
+    --navy: #123a68;
+    --navy-2: #0c2846;
+    --blue: #0168b7;
+    --red: #d92b1c;
+    --red-ink: #ffffff;
   }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0d1117;
-      --ink: #e6edf3;
-      --muted: #8b949e;
-      --line: #30363d;
-      --card: #161b22;
-      --card-hover: #1c2129;
-      --link: #4493f8;
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg: #0a1420;
+      --surface: #101c2c;
+      --surface-2: #16283a;
+      --ink: #e8edf5;
+      --ink-dim: #93a3b8;
+      --line: #223349;
+      --navy: #1c4f8c;
+      --navy-2: #0e2038;
+      --blue: #4fa3e6;
+      --red: #ff5b45;
+      --red-ink: #10233f;
     }
   }
-  :root[data-theme="dark"] {
-    --bg: #0d1117;
-    --ink: #e6edf3;
-    --muted: #8b949e;
-    --line: #30363d;
-    --card: #161b22;
-    --card-hover: #1c2129;
-    --link: #4493f8;
+  :root[data-theme="dark"]{
+    --bg: #0a1420;
+    --surface: #101c2c;
+    --surface-2: #16283a;
+    --ink: #e8edf5;
+    --ink-dim: #93a3b8;
+    --line: #223349;
+    --navy: #1c4f8c;
+    --navy-2: #0e2038;
+    --blue: #4fa3e6;
+    --red: #ff5b45;
+    --red-ink: #10233f;
   }
 
-  body {
-    font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans Thai", sans-serif;
-    max-width: 640px;
-    margin: 3rem auto;
-    padding: 0 1.5rem 4rem;
-    line-height: 1.6;
-    color: var(--ink);
+  *{ box-sizing: border-box; }
+  body{
+    margin: 0;
     background: var(--bg);
+    color: var(--ink);
+    font-family: "Roboto", system-ui, -apple-system, "Segoe UI", "Noto Sans Thai", sans-serif;
   }
-  h1 {
-    font-size: 1.6rem;
-    margin: 0 0 .4rem;
+  .wrap{ max-width: 980px; margin: 0 auto; padding: 0 24px 56px; }
+
+  .topbar{ background: var(--navy); color: #fff; }
+  .topbar-inner{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+    font-size: 12px;
+    letter-spacing: .02em;
+    font-weight: 500;
   }
-  .sub {
-    margin: 0 0 2rem;
-    color: var(--muted);
+  .topbar-inner span{ opacity: .85; }
+
+  .masthead{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 26px 0 20px;
+    flex-wrap: wrap;
   }
-  ul { list-style: none; padding: 0; margin: 0; }
-  li { margin: .75rem 0; }
-  a.card {
-    display: block;
-    padding: 1rem 1.25rem;
+  .brand{ display: flex; align-items: center; gap: 12px; }
+  .brand-badge{
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 46px;
+    height: 30px;
+    border-radius: 15px;
+    background: linear-gradient(180deg, var(--red), #a81c11);
+    color: var(--red-ink);
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: .01em;
+    box-shadow: inset 0 -2px 3px rgba(0,0,0,.25), inset 0 1px 1px rgba(255,255,255,.4);
+    flex: none;
+  }
+  .brand-word{ line-height: 1.15; }
+  .brand-word .en{
+    font-size: 21px;
+    font-weight: 900;
+    color: var(--blue);
+    letter-spacing: -0.01em;
+  }
+  .brand-word .th{
+    font-size: 11.5px;
+    color: var(--ink-dim);
+    font-weight: 500;
+    margin-top: 1px;
+  }
+  .masthead .stamp{
+    font-family: "Roboto Mono", monospace;
+    font-size: 12px;
+    color: var(--ink-dim);
+    text-align: right;
+    line-height: 1.6;
+    white-space: nowrap;
+  }
+
+  .hub-label{
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 26px;
+  }
+  .hub-label::before{
+    content: "";
+    width: 4px;
+    height: 22px;
+    background: var(--red);
+    border-radius: 2px;
+  }
+  .hub-label h1{
+    font-size: clamp(20px, 3vw, 25px);
+    font-weight: 700;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media (max-width: 700px){ .grid{ grid-template-columns: 1fr; } }
+
+  .card{
+    background: var(--surface);
     border: 1px solid var(--line);
-    border-radius: 8px;
+    border-top: 3px solid var(--navy);
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
     text-decoration: none;
-    color: var(--link);
+    color: var(--ink);
+    overflow: hidden;
+    transition: border-color .15s ease, transform .15s ease, box-shadow .15s ease;
+  }
+  .card:hover{ border-top-color: var(--blue); transform: translateY(-2px); box-shadow: 0 10px 24px -14px rgba(16,35,63,.35); }
+  .card:focus-visible{ outline: 3px solid var(--blue); outline-offset: 2px; }
+
+  .card .tag{
+    font-family: "Roboto Mono", monospace;
+    font-size: 11px;
     font-weight: 600;
-    background: var(--card);
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    padding: 12px 20px 0;
+    color: var(--blue);
   }
-  a.card:hover { background: var(--card-hover); }
-  a.card .desc {
-    display: block;
-    margin-top: .25rem;
-    font-weight: 400;
-    font-size: .9rem;
-    color: var(--muted);
+
+  .card .body{ padding: 8px 20px 22px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+  .card h2{
+    font-size: 21px;
+    font-weight: 700;
+    margin: 0;
+    color: var(--navy);
+    text-wrap: balance;
   }
-  footer {
-    margin-top: 2.5rem;
-    padding-top: 1rem;
+  :root[data-theme="dark"] .card h2{ color: var(--blue); }
+  @media (prefers-color-scheme: dark){ :root:not([data-theme="light"]) .card h2{ color: var(--blue); } }
+
+  .card .desc{ font-size: 13.5px; color: var(--ink-dim); line-height: 1.55; margin: 0; }
+
+  .stats{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 14px;
     border-top: 1px solid var(--line);
-    font-size: .85rem;
-    color: var(--muted);
+  }
+  .stat .n{
+    font-family: "Roboto Mono", monospace;
+    font-size: 20px;
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    color: var(--ink);
+  }
+  .stat .l{ font-size: 11px; color: var(--ink-dim); margin-top: 2px; }
+
+  .card .go{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: #fff;
+    background: var(--navy);
+    padding: 12px 20px;
+    letter-spacing: .02em;
+  }
+  .card .go svg{ width: 14px; height: 14px; transition: transform .15s ease; }
+  .card:hover .go{ background: var(--blue); }
+  .card:hover .go svg{ transform: translateX(3px); }
+
+  footer{
+    margin-top: 32px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--ink-dim);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  footer code{
+    font-family: "Roboto Mono", monospace;
+    background: var(--surface-2);
+    padding: 2px 6px;
+    border-radius: 3px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition: none !important; }
   }
 </style>
 
-<h1>Vessel Ops Dashboards</h1>
-<p class="sub">รวมลิงก์แดชบอร์ดปฏิบัติการท่าเรือ THBKK &amp; THLCH — สร้างด้วย AI</p>
+<div class="topbar">
+  <div class="topbar-inner">
+    <span>Internal Operations</span>
+    <span>E-Service</span>
+  </div>
+</div>
 
-<ul>
-  <li>
+<div class="wrap">
+  <div class="masthead">
+    <div class="brand">
+      <span class="brand-badge">HAL</span>
+      <div class="brand-word">
+        <div class="en">HEUNG-A LINE</div>
+        <div class="th">興亞 LINE 株式會社 · Terminal Operations</div>
+      </div>
+    </div>
+    <div class="stamp">อัปเดตล่าสุด<br><span id="stamp-date">—</span></div>
+  </div>
+
+  <div class="hub-label"><h1>Terminal Ops Hub — รวมลิงก์แดชบอร์ด</h1></div>
+
+  <div class="grid">
     <a class="card" href="https://sirichai1265.github.io/heung-a-sked/" target="_blank" rel="noopener">
-      Vessel Schedule
-      <span class="desc">ตารางหมุนเวียนเรือ — ETA/ETD, สถานะ Alongside / In-transit, เรือเข้าใน 48 ชม.</span>
+      <div class="tag">Sked · Rotation</div>
+      <div class="body">
+        <h2>Vessel Schedule</h2>
+        <p class="desc">ตารางหมุนเวียนเรือแบบสด — ETA/ETD, สถานะ Alongside / In-transit และเรือเข้าใน 48 ชม. จากไฟล์ตารางล่าสุด</p>
+        <div class="stats">
+          <div class="stat"><div class="n">31</div><div class="l">เรือติดตามทั้งหมด</div></div>
+          <div class="stat"><div class="n">5</div><div class="l">กำลัง Alongside</div></div>
+          <div class="stat"><div class="n">2</div><div class="l">ถึงท่าใน 48 ชม.</div></div>
+          <div class="stat"><div class="n">10</div><div class="l">ตารางเปลี่ยนจากเมื่อวาน</div></div>
+        </div>
+      </div>
+      <div class="go">เปิดแดชบอร์ด
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
     </a>
-  </li>
-  <li>
-    <a class="card" href="https://sirichai1265.github.io/heung-a-cutoff/" target="_blank" rel="noopener">
-      Cut off / Open Gate Dashboard
-      <span class="desc">Cut-off Dry (ETA−24h) / Reefer (ETA−1h) และ Open gate คืนตู้เปล่า (ETD−6d)</span>
-    </a>
-  </li>
-</ul>
 
-<footer>2 dashboards · POL THBKK / THLCH · updated <span id="updated">—</span></footer>
+    <a class="card" href="https://sirichai1265.github.io/heung-a-cutoff/" target="_blank" rel="noopener">
+      <div class="tag">Gate · Cut-off</div>
+      <div class="body">
+        <h2>Cut off / Open Gate Dashboard</h2>
+        <p class="desc">Cut-off Dry (ETA−24h) / Reefer (ETA−1h) และวัน Open gate คืนตู้เปล่ารายเที่ยวเรือ คำนวณจากตารางเรือล่าสุด</p>
+        <div class="stats">
+          <div class="stat"><div class="n">99</div><div class="l">เที่ยวเรือทั้งหมด</div></div>
+          <div class="stat"><div class="n">42 / 57</div><div class="l">THBKK / THLCH</div></div>
+          <div class="stat"><div class="n">5</div><div class="l">ถึงท่าใน 7 วัน</div></div>
+          <div class="stat"><div class="n">14 ก.ย.</div><div class="l">Cut-off ใกล้สุด (Dry)</div></div>
+        </div>
+      </div>
+      <div class="go">เปิดแดชบอร์ด
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+      </div>
+    </a>
+  </div>
+
+  <footer>
+    <span>โฮสต์บน GitHub Pages · <code>sirichai1265.github.io</code></span>
+    <span>ตัวเลขสรุปด้านบนเป็นค่า ณ เวลาที่จัดทำหน้านี้ — เปิดลิงก์เพื่อดูข้อมูลล่าสุด</span>
+  </footer>
+</div>
 
 <script>
-  document.getElementById("updated").textContent = new Intl.DateTimeFormat("en-GB", {
-    timeZone: "Asia/Bangkok", day: "2-digit", month: "short", year: "numeric"
+  document.getElementById("stamp-date").textContent = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Bangkok", year: "numeric", month: "2-digit", day: "2-digit"
   }).format(new Date());
 </script>
